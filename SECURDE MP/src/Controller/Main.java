@@ -43,9 +43,9 @@ public class Main {
         sqlite.addUser("client2", "qwerty1234", 2);
         // Get users
         ArrayList<User> users = sqlite.getUsers();
-        System.out.println(users.get(1).getUsername());
-        System.out.println(users.get(2).getUsername());
-        System.out.println(users.get(3).getUsername());
+//        System.out.println(users.get(1).getUsername());
+//        System.out.println(users.get(2).getUsername());
+//        System.out.println(users.get(3).getUsername());
         for (int nCtr = 0; nCtr < users.size(); nCtr++) {
             System.out.println("===== User " + users.get(nCtr).getId() + " =====");
             System.out.println(" Username: " + users.get(nCtr).getUsername());
@@ -58,7 +58,7 @@ public class Main {
         frame.init(this);
 
     }
-    public byte[] generateSalt() {
+    public byte[] generateSalt() { // generates random salt
             Random random = new Random();
             byte bytes[] = new byte[20];
             random.nextBytes(bytes);
@@ -66,10 +66,10 @@ public class Main {
         }
     public String hashPassword(String password) {
         try {
-            int iterations = 218201;
+            int iterations = 218201; // random number of iterations to perform
             char[] chars = password.toCharArray();
             byte[] salt = generateSalt();
-            PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 512);
+            PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 512); // hash password
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             byte[] hash = skf.generateSecret(spec).getEncoded();
             return iterations + ":" + bytesToHex(salt) + ":" + bytesToHex(hash);
@@ -80,7 +80,7 @@ public class Main {
     }
     private static boolean validatePassword(String originalPassword, String storedPassword){ // check if equal password
         try {
-            String[] parts = storedPassword.split(":");
+            String[] parts = storedPassword.split(":"); // split string
             int iterations = Integer.parseInt(parts[0]);
             byte[] salt = fromHex(parts[1]);
             byte[] hash = fromHex(parts[2]);
@@ -89,26 +89,13 @@ public class Main {
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             byte[] testHash = skf.generateSecret(spec).getEncoded();
             int diff = hash.length ^ testHash.length;
-            for (int i = 0; i < hash.length && i < testHash.length; i++) {
+            for (int i = 0; i < hash.length && i < testHash.length; i++) { // slow function to compare the byte arrays
                 diff |= hash[i] ^ testHash[i];
             }
-        return diff == 0;
+        return diff == 0; // true if the arrays are equal false if not
         }   
         catch (Exception ex) {
             ex.printStackTrace();
-        }
-        return false;
-    }
-    public boolean searchUser(String username, String password) { // check login
-        ArrayList<User> users = sqlite.getUsers();
-        System.out.println(users.size());
-        for (int ctr = 0; ctr < users.size(); ctr++) {
-            System.out.println(users.get(ctr).getUsername());
-            if (username.equals(users.get(ctr).getUsername())) { // check if username in list
-                if (password.equals(users.get(ctr).getPassword())) { // check if password matches user password
-                    return true;
-                }
-            }
         }
         return false;
     }
@@ -121,6 +108,29 @@ public class Main {
             bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
         }
         return bytes;
+    }
+    public boolean addUser(String username, String password){
+        ArrayList<User> users = sqlite.getUsers();
+        User user = new User(username, password);
+        if(sqlite.checkExistingUsers(username)){
+            sqlite.addUser(username, hashPassword(password));
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean loginUser(String username, String password) { // check login
+        ArrayList<User> users = sqlite.getUsers();
+        for (int ctr = 0; ctr < users.size(); ctr++) {
+            System.out.println(users.get(ctr).getUsername());
+            if (username.equals(users.get(ctr).getUsername())) { // check if username in list
+                if (validatePassword(password, users.get(ctr).getPassword())) { // check if password matches user password
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     //    public String decrypt(byte[] encrypted, SecretKey secretKey){
 //        Cipher cipher;

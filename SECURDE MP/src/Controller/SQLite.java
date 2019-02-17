@@ -107,6 +107,25 @@ public class SQLite {
         } catch (Exception ex) {
         }
     }
+        public boolean checkExistingUsers(String username) {
+        String sql = "SELECT username FROM users";
+        ArrayList<User> users = new ArrayList<User>();
+
+        try (Connection conn = DriverManager.getConnection(driverURL);
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                if(username.equals(rs.getString("username"))){
+                    return false;
+                }
+                else
+                    return true;
+            }
+        } catch (Exception ex) {
+        }
+        return true;
+    }
 
 //    public String searchUser(String username, String password) {
 //        String sql = "SELECT username FROM users WHERE username='" + username + "');";
