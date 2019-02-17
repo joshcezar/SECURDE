@@ -108,18 +108,18 @@ public class SQLite {
         }
     }
 
-    public String searchUser(String username, String password) {
-        String sql = "SELECT username FROM users WHERE username='" + username + "');";
-        String sq2 = "SELECT password FROM users WHERE password='" + password + "');";
-        try (Connection conn = DriverManager.getConnection(driverURL);
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-                    String user = rs.getString("username");
-                    return user;
-        } catch (Exception ex) {
-        }
-        return "";
-    }
+//    public String searchUser(String username, String password) {
+//        String sql = "SELECT username FROM users WHERE username='" + username + "');";
+//        String sq2 = "SELECT password FROM users WHERE password='" + password + "');";
+//        try (Connection conn = DriverManager.getConnection(driverURL);
+//                Statement stmt = conn.createStatement();
+//                ResultSet rs = stmt.executeQuery(sql)) {
+//                    String user = rs.getString("username");
+//                    return user;
+//        } catch (Exception ex) {
+//        }
+//        return "";
+//    }
 
     
 

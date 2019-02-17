@@ -249,8 +249,11 @@ public class Frame extends javax.swing.JFrame {
         main.sqlite.addUser(username, password);
     }
     public void loginAction(String username, String password) {
-        main.sqlite.searchUser(username, password);
-        JOptionPane.showMessageDialog(null, main.sqlite.searchUser(username, password));
+        if(main.searchUser(username, password)){
+            frameView.show(Container, "homePnl");
+        }
+        
+        JOptionPane.showMessageDialog(null, main.searchUser(username, password));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

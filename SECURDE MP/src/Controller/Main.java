@@ -13,6 +13,7 @@ public class Main {
     
     public static void main(String[] args) {
         new Main().init();
+        
     }
     
     public void init(){
@@ -23,7 +24,7 @@ public class Main {
         sqlite.createNewDatabase();
         
         // Drop users table if needed
-//        sqlite.dropUserTable();
+        sqlite.dropUserTable();
         
         // Create users table if not exist
         sqlite.createUserTable();
@@ -37,6 +38,9 @@ public class Main {
         
         // Get users
         ArrayList<User> users = sqlite.getUsers();
+        System.out.println(users.get(1).getUsername());
+        System.out.println(users.get(2).getUsername());
+        System.out.println(users.get(3).getUsername());
         for(int nCtr = 0; nCtr < users.size(); nCtr++){
             System.out.println("===== User " + users.get(nCtr).getId() + " =====");
             System.out.println(" Username: " + users.get(nCtr).getUsername());
@@ -49,5 +53,17 @@ public class Main {
         frame.init(this);
         
     }
-    
+    public boolean searchUser(String username, String password){
+        ArrayList<User> users = sqlite.getUsers();
+        System.out.println(users.size());
+        for(int ctr = 0; ctr < users.size(); ctr++){
+            System.out.println(users.get(ctr).getUsername());
+            if(username.equals(users.get(ctr).getUsername())){
+                if(password.equals(users.get(ctr).getPassword())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
