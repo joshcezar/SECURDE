@@ -116,12 +116,13 @@ public class SQLite {
                 ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
+                System.out.println(username);
+                System.out.println(rs.getString("username"));
                 if(username.equals(rs.getString("username"))){
                     return false;
                 }
-                else
-                    return true;
             }
+            return true;
         } catch (Exception ex) {
         }
         return true;
