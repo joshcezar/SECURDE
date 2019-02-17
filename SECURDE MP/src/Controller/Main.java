@@ -4,16 +4,17 @@ package Controller;
 import Model.User;
 import View.Frame;
 import java.util.ArrayList;
-
-
-
+import java.nio.charset.StandardCharsets; 
+import java.security.MessageDigest; 
+import javax.xml.bind.DatatypeConverter; 
 public class Main {
     
     public SQLite sqlite;
     
     public static void main(String[] args) {
-        new Main().init();
-        
+        Main m = new Main();
+        m.init();
+        System.out.println(m.hashPassword("test"));
     }
     
     public void init(){
@@ -53,6 +54,19 @@ public class Main {
         frame.init(this);
         
     }
+    public String hashPassword(String password){
+        try{
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes(StandardCharsets.UTF_8));
+            String encoded;
+            encoded = DatatypeConverter.printHexBinary(hash);
+            return encoded;
+        }   
+        catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+        
+    }
     public boolean searchUser(String username, String password){
         ArrayList<User> users = sqlite.getUsers();
         System.out.println(users.size());
@@ -66,4 +80,5 @@ public class Main {
         }
         return false;
     }
+
 }
