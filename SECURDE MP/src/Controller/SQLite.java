@@ -107,19 +107,39 @@ public class SQLite {
         } catch (Exception ex) {
         }
     }
+        public boolean checkExistingUsers(String username) {
+        String sql = "SELECT username FROM users";
+        ArrayList<User> users = new ArrayList<User>();
 
-    public String searchUser(String username, String password) {
-        String sql = "SELECT username FROM users WHERE username='" + username + "');";
-        String sq2 = "SELECT password FROM users WHERE password='" + password + "');";
         try (Connection conn = DriverManager.getConnection(driverURL);
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
-                    String user = rs.getString("username");
-                    return user;
+
+            while (rs.next()) {
+                System.out.println(username);
+                System.out.println(rs.getString("username"));
+                if(username.equals(rs.getString("username"))){
+                    return false;
+                }
+            }
+            return true;
         } catch (Exception ex) {
         }
-        return "";
+        return true;
     }
+
+//    public String searchUser(String username, String password) {
+//        String sql = "SELECT username FROM users WHERE username='" + username + "');";
+//        String sq2 = "SELECT password FROM users WHERE password='" + password + "');";
+//        try (Connection conn = DriverManager.getConnection(driverURL);
+//                Statement stmt = conn.createStatement();
+//                ResultSet rs = stmt.executeQuery(sql)) {
+//                    String user = rs.getString("username");
+//                    return user;
+//        } catch (Exception ex) {
+//        }
+//        return "";
+//    }
 
     
 

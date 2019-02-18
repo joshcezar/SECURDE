@@ -246,11 +246,19 @@ public class Frame extends javax.swing.JFrame {
     }
     
     public void registerAction(String username, String password, String confpass){
-        main.sqlite.addUser(username, password);
+        if(main.addUser(username, password)){
+            frameView.show(Container, "homePnl");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "username already taken");
+        }
     }
     public void loginAction(String username, String password) {
-        main.sqlite.searchUser(username, password);
-        JOptionPane.showMessageDialog(null, main.sqlite.searchUser(username, password));
+        if(main.loginUser(username, password)){
+            frameView.show(Container, "homePnl");
+        }
+        
+        JOptionPane.showMessageDialog(null, main.loginUser(username, password));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
