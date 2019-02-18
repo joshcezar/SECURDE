@@ -91,9 +91,9 @@ public class Login extends javax.swing.JPanel {
                 .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        frame.mainNav();
+        frame.checkRole(jTextField1.getText(), jTextField2.getText());
         frame.loginAction(jTextField1.getText(), jTextField2.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
