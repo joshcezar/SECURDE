@@ -10,16 +10,9 @@ import javax.xml.bind.DatatypeConverter;
 public class Main {
 
     public SQLite sqlite;
-
     public static void main(String[] args) {
         Main m = new Main();
         m.init();
-        String test = "password";
-        String test2 = m.hashPassword("password");
-        if(m.validatePassword(test, test2))
-            System.out.println("Hi");
-//        String test3 = m.hashPassword("password");
-        System.out.println(test2);
     }
 
     public void init() {
@@ -36,16 +29,13 @@ public class Main {
         sqlite.createUserTable();
 
         // Add users
-        sqlite.addUser("admin", "qwerty1234", 5);
-        sqlite.addUser("manager", "qwerty1234", 4);
-        sqlite.addUser("staff", "qwerty1234", 3);
-        sqlite.addUser("client1", "qwerty1234", 2);
-        sqlite.addUser("client2", "qwerty1234", 2);
+        sqlite.addUser("admin", hashPassword("qwerty1234"), 5);
+        sqlite.addUser("manager", hashPassword("qwerty1234"), 4);
+        sqlite.addUser("staff", hashPassword("qwerty1234"), 3);
+        sqlite.addUser("client1", hashPassword("qwerty1234"), 2);
+        sqlite.addUser("client2", hashPassword("qwerty1234"), 2);
         // Get users
         ArrayList<User> users = sqlite.getUsers();
-//        System.out.println(users.get(1).getUsername());
-//        System.out.println(users.get(2).getUsername());
-//        System.out.println(users.get(3).getUsername());
         for (int nCtr = 0; nCtr < users.size(); nCtr++) {
             System.out.println("===== User " + users.get(nCtr).getId() + " =====");
             System.out.println(" Username: " + users.get(nCtr).getUsername());
@@ -66,10 +56,10 @@ public class Main {
         }
     public String hashPassword(String password) {
         try {
-            int iterations = 218201; // random number of iterations to perform
+            int iterations = 853715; // random number of iterations to perform
             char[] chars = password.toCharArray();
             byte[] salt = generateSalt();
-            PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 512); // hash password
+            PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 512); // hash password iterations slow down log in
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             byte[] hash = skf.generateSecret(spec).getEncoded();
             return iterations + ":" + bytesToHex(salt) + ":" + bytesToHex(hash);
@@ -80,7 +70,7 @@ public class Main {
     }
     private static boolean validatePassword(String originalPassword, String storedPassword){ // check if equal password
         try {
-            String[] parts = storedPassword.split(":"); // split string
+            String[] parts = storedPassword.split(":");
             int iterations = Integer.parseInt(parts[0]);
             byte[] salt = fromHex(parts[1]);
             byte[] hash = fromHex(parts[2]);
@@ -123,15 +113,31 @@ public class Main {
     public boolean loginUser(String username, String password) { // check login
         ArrayList<User> users = sqlite.getUsers();
         for (int ctr = 0; ctr < users.size(); ctr++) {
-            System.out.println(users.get(ctr).getUsername());
             if (username.equals(users.get(ctr).getUsername())) { // check if username in list
                 if (validatePassword(password, users.get(ctr).getPassword())) { // check if password matches user password
+                    saveLoggedInUser(users.get(ctr).getId(), users.get(ctr).getUsername(), users.get(ctr).getPassword(), users.get(ctr).getRole());
                     return true;
                 }
             }
         }
         return false;
     }
+    public User saveLoggedInUser(int id, String username, String password, int role){
+        User user = new User(id, username, password, role);
+        return user;
+    }
+    public int getLoggedInUser(String username, String password) {
+        ArrayList<User> users = sqlite.getUsers();
+        for (int ctr = 0; ctr < users.size(); ctr++) {
+            if (username.equals(users.get(ctr).getUsername())) { // check if username in list
+                if (validatePassword(password, users.get(ctr).getPassword())) { // check if password matches user password
+                    return users.get(ctr).getRole();
+                }
+            }
+        }
+        return 0;
+    }
+}
     //    public String decrypt(byte[] encrypted, SecretKey secretKey){
 //        Cipher cipher;
 //        try {
@@ -181,4 +187,4 @@ public class Main {
 //        }
 //        return null;
 //    }
-}
+

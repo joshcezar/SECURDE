@@ -178,19 +178,36 @@ public class Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void adminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBtnActionPerformed
-        contentView.show(Content, "adminHomePnl");
+        if (role != 5) {
+            adminBtn.setVisible(false);
+            JOptionPane.showMessageDialog(null, "no access");
+        } else {
+            contentView.show(Content, "adminHomePnl");
+        }
     }//GEN-LAST:event_adminBtnActionPerformed
 
     private void managerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerBtnActionPerformed
-        contentView.show(Content, "managerHomePnl");
+        if (role != 4) {
+            JOptionPane.showMessageDialog(null, "no access");
+        } else {
+            contentView.show(Content, "managerHomePnl");
+        }
     }//GEN-LAST:event_managerBtnActionPerformed
 
     private void staffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBtnActionPerformed
-        contentView.show(Content, "staffHomePnl");
+        if (role != 3) {
+            JOptionPane.showMessageDialog(null, "no access");
+        } else {
+            contentView.show(Content, "staffHomePnl");
+        }
     }//GEN-LAST:event_staffBtnActionPerformed
 
     private void clientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientBtnActionPerformed
-        contentView.show(Content, "clientHomePnl");
+        if (role != 2) {
+            JOptionPane.showMessageDialog(null, "no access");
+        } else {
+            contentView.show(Content, "clientHomePnl");
+        }
     }//GEN-LAST:event_clientBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
@@ -200,65 +217,71 @@ public class Frame extends javax.swing.JFrame {
     public Main main;
     public Login loginPnl = new Login();
     public Register registerPnl = new Register();
-    
+
     private AdminHome adminHomePnl = new AdminHome();
     private ManagerHome managerHomePnl = new ManagerHome();
     private StaffHome staffHomePnl = new StaffHome();
     private ClientHome clientHomePnl = new ClientHome();
-    
+
     private CardLayout contentView = new CardLayout();
     private CardLayout frameView = new CardLayout();
-    
-    public void init(Main controller){
+    private int role;
+
+    public void init(Main controller) {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setTitle("SECURDE");
         this.setLocationRelativeTo(null);
-        
+
         this.main = controller;
         loginPnl.frame = this;
         registerPnl.frame = this;
-        
+
         Container.setLayout(frameView);
         Container.add(loginPnl, "loginPnl");
         Container.add(registerPnl, "registerPnl");
         Container.add(HomePnl, "homePnl");
         frameView.show(Container, "loginPnl");
-        
+
         Content.setLayout(contentView);
         Content.add(adminHomePnl, "adminHomePnl");
         Content.add(managerHomePnl, "managerHomePnl");
         Content.add(staffHomePnl, "staffHomePnl");
         Content.add(clientHomePnl, "clientHomePnl");
-        
         this.setVisible(true);
     }
-    
-    public void mainNav(){
+
+    public void mainNav() {
         frameView.show(Container, "homePnl");
     }
-    
-    public void loginNav(){
+
+    public void loginNav() {
         frameView.show(Container, "loginPnl");
     }
-    
-    public void registerNav(){
+
+    public void registerNav() {
         frameView.show(Container, "registerPnl");
     }
-    
-    public void registerAction(String username, String password, String confpass){
-        if(main.addUser(username, password)){
+
+    public void registerAction(String username, String password, String confpass) {
+        if (main.addUser(username, password)) {
             frameView.show(Container, "homePnl");
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "username already taken");
         }
     }
+
     public void loginAction(String username, String password) {
-        if(main.loginUser(username, password)){
+        if (main.loginUser(username, password)) {
             frameView.show(Container, "homePnl");
         }
-        
+
         JOptionPane.showMessageDialog(null, main.loginUser(username, password));
+    }
+
+    public void checkRole(String username, String password) {
+        
+        role = main.getLoggedInUser(username, password);
+        System.out.println(role);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
