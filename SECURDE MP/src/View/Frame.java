@@ -49,12 +49,12 @@ public class Frame extends javax.swing.JFrame {
         adminBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         adminBtn.setText("Admin Home");
         adminBtn.setFocusable(false);
-        adminBtn.addActionListener(new java.awt.event.ActionListener() {
+/*        adminBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adminBtnActionPerformed(evt);
             }
         });
-
+*/
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SECURITY Svcs");
@@ -64,32 +64,32 @@ public class Frame extends javax.swing.JFrame {
         managerBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         managerBtn.setText("Manager Home");
         managerBtn.setFocusable(false);
-        managerBtn.addActionListener(new java.awt.event.ActionListener() {
+/*        managerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 managerBtnActionPerformed(evt);
             }
         });
-
+*/
         staffBtn.setBackground(new java.awt.Color(250, 250, 250));
         staffBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         staffBtn.setText("Staff Home");
         staffBtn.setFocusable(false);
-        staffBtn.addActionListener(new java.awt.event.ActionListener() {
+/*        staffBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 staffBtnActionPerformed(evt);
             }
         });
-
+*/
         clientBtn.setBackground(new java.awt.Color(250, 250, 250));
         clientBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         clientBtn.setText("Client Home");
         clientBtn.setFocusable(false);
-        clientBtn.addActionListener(new java.awt.event.ActionListener() {
+/*        clientBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientBtnActionPerformed(evt);
             }
         });
-
+*/
         logoutBtn.setBackground(new java.awt.Color(250, 250, 250));
         logoutBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         logoutBtn.setText("LOGOUT");
@@ -283,6 +283,44 @@ public class Frame extends javax.swing.JFrame {
         role = main.getLoggedInUser(username, password);
         System.out.println(role);
     }
+//Disable buttons
+    public void adminLogin() {
+    	//Show Admin Page
+    	contentView.show(Content, "adminHomePnl");
+    	
+      	/*Disable: Manager Button, Staff Button, Client Button */
+      	managerBtn.setEnabled(false);
+      	staffBtn.setEnabled(false);
+      	clientBtn.setEnabled(false);
+
+    }
+     public void managerLogin() {
+    	 //Show Manager Page
+    	 contentView.show(Content, "managerHomePnl");
+    	 
+      	/*Disable: Admin Button, Staff Button, Client Button */
+      	adminBtn.setEnabled(false);
+      	staffBtn.setEnabled(false);
+      	clientBtn.setEnabled(false);
+    }
+     public void staffLogin() {
+    	 //Show Staff Page
+    	 contentView.show(Content, "staffHomePnl");
+    	 
+       	/*Disable: Manager Button, Admin Button, Client Button */
+       	managerBtn.setEnabled(false);
+       	adminBtn.setEnabled(false);
+       	clientBtn.setEnabled(false);
+     }
+     public void clientLogin() {
+    	 //Show Client Page
+    	 contentView.show(Content, "clientHomePnl");
+    	 
+       	/*Disable: Manager Button, Staff Button, Admin Button */
+       	managerBtn.setEnabled(false);
+       	staffBtn.setEnabled(false);
+       	adminBtn.setEnabled(false);
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
