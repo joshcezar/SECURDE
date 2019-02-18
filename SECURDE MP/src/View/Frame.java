@@ -128,7 +128,7 @@ public class Frame extends javax.swing.JFrame {
                 .addComponent(staffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -195,6 +195,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         frameView.show(Container, "loginPnl");
+        JOptionPane.showMessageDialog(null, "Log-out successful!");
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     public Main main;
@@ -229,7 +230,6 @@ public class Frame extends javax.swing.JFrame {
         Content.add(managerHomePnl, "managerHomePnl");
         Content.add(staffHomePnl, "staffHomePnl");
         Content.add(clientHomePnl, "clientHomePnl");
-        
         this.setVisible(true);
     }
     
@@ -250,15 +250,18 @@ public class Frame extends javax.swing.JFrame {
             frameView.show(Container, "homePnl");
         }
         else{
-            JOptionPane.showMessageDialog(null, "username already taken");
+            JOptionPane.showMessageDialog(null, "Invalid Credentials");
         }
     }
+    
     public void loginAction(String username, String password) {
         if(main.loginUser(username, password)){
             frameView.show(Container, "homePnl");
+            JOptionPane.showMessageDialog(null, "Succesfully Logged-in!");
+        }else{
+            JOptionPane.showMessageDialog(null, "No such credentials found!");
         }
         
-        JOptionPane.showMessageDialog(null, main.loginUser(username, password));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

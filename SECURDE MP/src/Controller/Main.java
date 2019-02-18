@@ -109,14 +109,43 @@ public class Main {
         }
         return bytes;
     }
+    public boolean checkRequiredMinPassword(String password){
+        
+        boolean hasLetter = false;
+        boolean hasDigit = false;
+        
+        if (password.length() >= 8){
+            for (int i = 0; i < password.length(); i++) {
+                char c = password.charAt(i);
+                    if (Character.isLetter(c)){
+                        hasLetter = true;
+                    }else if (Character.isDigit(c)){
+                        hasDigit = true;
+                    }
+                    if(hasLetter && hasDigit){
+                            break;
+                    }
+            }
+                if (hasLetter && hasDigit){
+                    return true;
+                }else{
+                    return false;
+                    }
+        }else{
+            return false;
+        }
+    }
     public boolean addUser(String username, String password){
         ArrayList<User> users = sqlite.getUsers();
         User user = new User(username, password);
-        if(sqlite.checkExistingUsers(username)){
-            sqlite.addUser(username, hashPassword(password));
-            return true;
-        }
-        else{
+        if(checkRequiredMinPassword(password)){
+            if(sqlite.checkExistingUsers(username)){
+                sqlite.addUser(username, hashPassword(password));
+                return true;
+            }else{
+                return false;
+            }
+        }else{
             return false;
         }
     }
@@ -132,6 +161,7 @@ public class Main {
         }
         return false;
     }
+
     //    public String decrypt(byte[] encrypted, SecretKey secretKey){
 //        Cipher cipher;
 //        try {
