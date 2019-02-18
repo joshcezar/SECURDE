@@ -56,7 +56,7 @@ public class Main {
         }
     public String hashPassword(String password) {
         try {
-            int iterations = 853715; // random number of iterations to perform
+            int iterations = 402352; // random number of iterations to perform
             char[] chars = password.toCharArray();
             byte[] salt = generateSalt();
             PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 512); // hash password iterations slow down log in

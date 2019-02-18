@@ -188,6 +188,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void managerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerBtnActionPerformed
         if (role != 4) {
+            managerBtn.setVisible(false);
             JOptionPane.showMessageDialog(null, "no access");
         } else {
             contentView.show(Content, "managerHomePnl");
@@ -196,6 +197,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void staffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBtnActionPerformed
         if (role != 3) {
+            staffBtn.setVisible(false);
             JOptionPane.showMessageDialog(null, "no access");
         } else {
             contentView.show(Content, "staffHomePnl");
@@ -204,6 +206,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void clientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientBtnActionPerformed
         if (role != 2) {
+            clientBtn.setVisible(false);
             JOptionPane.showMessageDialog(null, "no access");
         } else {
             contentView.show(Content, "clientHomePnl");
@@ -263,10 +266,14 @@ public class Frame extends javax.swing.JFrame {
     }
 
     public void registerAction(String username, String password, String confpass) {
-        if (main.addUser(username, password)) {
-            frameView.show(Container, "homePnl");
-        } else {
-            JOptionPane.showMessageDialog(null, "username already taken");
+        if(password.equals(confpass)){
+            if (main.addUser(username, password)) {
+                frameView.show(Container, "homePnl");
+            } else {
+                JOptionPane.showMessageDialog(null, "username already taken");
+            }
+        } else{
+            JOptionPane.showMessageDialog(null, "password doesn't match password");
         }
     }
 
