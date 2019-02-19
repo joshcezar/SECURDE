@@ -10,6 +10,10 @@ import javax.xml.bind.DatatypeConverter;
 public class Main {
 
     public SQLite sqlite;
+    private int passLength = 0;
+    private String password; //text that was saved
+
+
     public static void main(String[] args) {
         Main m = new Main();
         m.init();
@@ -56,7 +60,7 @@ public class Main {
         }
     public String hashPassword(String password) {
         try {
-            int iterations = 402352; // random number of iterations to perform
+            int iterations = 1; // random number of iterations to perform
             char[] chars = password.toCharArray();
             byte[] salt = generateSalt();
             PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 512); // hash password iterations slow down log in
@@ -155,17 +159,38 @@ public class Main {
         User user = new User(id, username, password, role);
         return user;
     }
-    public int getLoggedInUser(String username, String password) {
+    public int getLoggedInUser(String username) {
         ArrayList<User> users = sqlite.getUsers();
         for (int ctr = 0; ctr < users.size(); ctr++) {
             if (username.equals(users.get(ctr).getUsername())) { // check if username in list
-                if (validatePassword(password, users.get(ctr).getPassword())) { // check if password matches user password
                     return users.get(ctr).getRole();
                 }
             }
-        }
         return 0;
-    }
+        }
+        
+    
+    public String hidePassword(String rawPass){
+            passLength = rawPass.length();
+            String asterisks = "";
+            for (int i = 0; i < passLength; i++) {
+                asterisks += "*";
+            }
+            System.out.println(password);
+            return asterisks;
+        }
+        public String savePassword(String rawPass){
+            if (rawPass.length() > passLength) {
+                for (int i = 0; i < rawPass.length(); i++) {
+                    if (rawPass.charAt(i) != '*') {
+                        password += rawPass.charAt(i);
+                    }
+                }
+            } else if (rawPass.length() < passLength) {
+                password = password.substring(0, rawPass.length());
+            }
+            return password;
+        }
 }
     //    public String decrypt(byte[] encrypted, SecretKey secretKey){
 //        Cipher cipher;

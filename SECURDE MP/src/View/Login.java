@@ -1,12 +1,16 @@
-
 package View;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends javax.swing.JPanel {
 
     public Frame frame;
-    
+    String password;
+
     public Login() {
         initComponents();
+        password = "";
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +42,16 @@ public class Login extends javax.swing.JPanel {
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "PASSWORD", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -91,10 +105,15 @@ public class Login extends javax.swing.JPanel {
                 .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        frame.checkRole(jTextField1.getText(), jTextField2.getText());
-        frame.loginAction(jTextField1.getText(), jTextField2.getText());
+        frame.checkRole(jTextField1.getText());
+        if(password.contains("null")){
+        frame.loginAction(jTextField1.getText(), password.substring(4) + jTextField2.getText().substring(jTextField2.getText().length() - 1));
+        }
+        else
+           frame.loginAction(jTextField1.getText(), password + jTextField2.getText().substring(jTextField2.getText().length() - 1)); 
+        System.out.println("password = " + password.substring(4) + jTextField2.getText().substring(jTextField2.getText().length() - 1));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -104,6 +123,22 @@ public class Login extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        // TODO add your handling code here:
+        jTextField2.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent arg0) {
+                password = frame.main.savePassword(jTextField2.getText());
+                jTextField2.setText(frame.main.hidePassword(jTextField2.getText()));
+            }
+        });
+    }//GEN-LAST:event_jTextField2KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

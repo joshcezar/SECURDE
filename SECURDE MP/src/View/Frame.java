@@ -285,9 +285,9 @@ public class Frame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, main.loginUser(username, password));
     }
 
-    public void checkRole(String username, String password) {
+    public void checkRole(String username) {
         
-        role = main.getLoggedInUser(username, password);
+        role = main.getLoggedInUser(username);
         System.out.println(role);
     }
 
