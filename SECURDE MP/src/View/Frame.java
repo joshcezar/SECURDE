@@ -282,6 +282,16 @@ public class Frame extends javax.swing.JFrame {
         
         role = main.getLoggedInUser(username, password);
         System.out.println(role);
+        
+        if(role==2) {
+        	clientLogin();
+        }else if(role==3) {
+        	staffLogin();
+        }else if(role==4) {
+        	managerLogin();
+        }else if(role==5) {
+        	adminLogin();
+        }
     }
 //Disable buttons
     public void adminLogin() {
@@ -289,9 +299,9 @@ public class Frame extends javax.swing.JFrame {
     	contentView.show(Content, "adminHomePnl");
     	
       	/*Disable: Manager Button, Staff Button, Client Button */
-      	managerBtn.setEnabled(false);
-      	staffBtn.setEnabled(false);
-      	clientBtn.setEnabled(false);
+      	managerBtn.setVisible(false);
+      	staffBtn.setVisible(false);
+      	clientBtn.setVisible(false);
 
     }
      public void managerLogin() {
@@ -299,27 +309,27 @@ public class Frame extends javax.swing.JFrame {
     	 contentView.show(Content, "managerHomePnl");
     	 
       	/*Disable: Admin Button, Staff Button, Client Button */
-      	adminBtn.setEnabled(false);
-      	staffBtn.setEnabled(false);
-      	clientBtn.setEnabled(false);
+      	adminBtn.setVisible(false);
+      	staffBtn.setVisible(false);
+      	clientBtn.setVisible(false);
     }
      public void staffLogin() {
     	 //Show Staff Page
     	 contentView.show(Content, "staffHomePnl");
     	 
        	/*Disable: Manager Button, Admin Button, Client Button */
-       	managerBtn.setEnabled(false);
-       	adminBtn.setEnabled(false);
-       	clientBtn.setEnabled(false);
+       	managerBtn.setVisible(false);
+       	adminBtn.setVisible(false);
+       	clientBtn.setVisible(false);
      }
      public void clientLogin() {
     	 //Show Client Page
     	 contentView.show(Content, "clientHomePnl");
     	 
        	/*Disable: Manager Button, Staff Button, Admin Button */
-       	managerBtn.setEnabled(false);
-       	staffBtn.setEnabled(false);
-       	adminBtn.setEnabled(false);
+       	managerBtn.setVisible(false);
+       	staffBtn.setVisible(false);
+       	adminBtn.setVisible(false);
      }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
