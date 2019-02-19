@@ -288,7 +288,6 @@ public class Frame extends javax.swing.JFrame {
     public void checkRole(String username) {
         
         role = main.getLoggedInUser(username);
-        System.out.println(role);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

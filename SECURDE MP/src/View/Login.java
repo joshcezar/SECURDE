@@ -42,6 +42,16 @@ public class Login extends javax.swing.JPanel {
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "PASSWORD", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        jTextField2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jTextField2MouseDragged(evt);
+            }
+        });
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTextField2MouseReleased(evt);
+            }
+        });
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -113,7 +123,6 @@ public class Login extends javax.swing.JPanel {
         }
         else
            frame.loginAction(jTextField1.getText(), password + jTextField2.getText().substring(jTextField2.getText().length() - 1)); 
-        System.out.println("password = " + password.substring(4) + jTextField2.getText().substring(jTextField2.getText().length() - 1));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -139,6 +148,15 @@ public class Login extends javax.swing.JPanel {
             }
         });
     }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTextField2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseReleased
+        
+    }//GEN-LAST:event_jTextField2MouseReleased
+
+    private void jTextField2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseDragged
+        // TODO add your handling code here:
+        jTextField2.setText("");
+    }//GEN-LAST:event_jTextField2MouseDragged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

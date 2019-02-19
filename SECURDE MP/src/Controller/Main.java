@@ -7,12 +7,12 @@ import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.xml.bind.DatatypeConverter;
+
 public class Main {
 
-    public SQLite sqlite;
+    private SQLite sqlite;
     private int passLength = 0;
     private String password; //text that was saved
-
 
     public static void main(String[] args) {
         Main m = new Main();
@@ -52,13 +52,15 @@ public class Main {
         frame.init(this);
 
     }
-    public byte[] generateSalt() { // generates random salt
-            Random random = new Random();
-            byte bytes[] = new byte[20];
-            random.nextBytes(bytes);
-            return bytes;
-        }
-    public String hashPassword(String password) {
+
+    private byte[] generateSalt() { // generates random salt
+        Random random = new Random();
+        byte bytes[] = new byte[20];
+        random.nextBytes(bytes);
+        return bytes;
+    }
+
+    private String hashPassword(String password) {
         try {
             int iterations = 1; // random number of iterations to perform
             char[] chars = password.toCharArray();
@@ -72,7 +74,8 @@ public class Main {
         }
         return null;
     }
-    private static boolean validatePassword(String originalPassword, String storedPassword){ // check if equal password
+
+    private static boolean validatePassword(String originalPassword, String storedPassword) { // check if equal password
         try {
             String[] parts = storedPassword.split(":");
             int iterations = Integer.parseInt(parts[0]);
@@ -86,16 +89,17 @@ public class Main {
             for (int i = 0; i < hash.length && i < testHash.length; i++) { // slow function to compare the byte arrays
                 diff |= hash[i] ^ testHash[i];
             }
-        return diff == 0; // true if the arrays are equal false if not
-        }   
-        catch (Exception ex) {
+            return diff == 0; // true if the arrays are equal false if not
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;
     }
-    private String bytesToHex(byte[] input){ // convert hexadecimal to byte[]
+
+    private String bytesToHex(byte[] input) { // convert hexadecimal to byte[]
         return DatatypeConverter.printHexBinary(input);
     }
+
     private static byte[] fromHex(String hex) { // convert byte[] to hexadecimal
         byte[] bytes = new byte[hex.length() / 2];
         for (int i = 0; i < bytes.length; i++) {
@@ -103,11 +107,12 @@ public class Main {
         }
         return bytes;
     }
-    public boolean checkRequiredMinPassword(String password){
-        
+
+    public boolean checkRequiredMinPassword(String password) {
+
         boolean hasLetter = false;
         boolean hasDigit = false;
-        
+
         if (password.length() >= 8) {
             for (int i = 0; i < password.length(); i++) {
                 char c = password.charAt(i);
@@ -129,69 +134,70 @@ public class Main {
             return false;
         }
     }
-    public boolean addUser(String username, String password){
+
+    public boolean addUser(String username, String password) {
         ArrayList<User> users = sqlite.getUsers();
         User user = new User(username, password);
-        if(checkRequiredMinPassword(password)){
-            if(sqlite.checkExistingUsers(username)){
+        if (checkRequiredMinPassword(password)) {
+            if (sqlite.checkExistingUsers(username)) {
                 sqlite.addUser(username, hashPassword(password));
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }else{
-            return false; 
+        } else {
+            return false;
         }
     }
+
     public boolean loginUser(String username, String password) { // check login
         ArrayList<User> users = sqlite.getUsers();
         for (int ctr = 0; ctr < users.size(); ctr++) {
             if (username.equals(users.get(ctr).getUsername())) { // check if username in list
                 if (validatePassword(password, users.get(ctr).getPassword())) { // check if password matches user password
-                    saveLoggedInUser(users.get(ctr).getId(), users.get(ctr).getUsername(), users.get(ctr).getPassword(), users.get(ctr).getRole());
                     return true;
                 }
             }
         }
         return false;
     }
-    public User saveLoggedInUser(int id, String username, String password, int role){
-        User user = new User(id, username, password, role);
-        return user;
-    }
+
+
     public int getLoggedInUser(String username) {
         ArrayList<User> users = sqlite.getUsers();
         for (int ctr = 0; ctr < users.size(); ctr++) {
             if (username.equals(users.get(ctr).getUsername())) { // check if username in list
-                    return users.get(ctr).getRole();
-                }
+                return users.get(ctr).getRole();
             }
+        }
         return 0;
+    }
+
+    public String hidePassword(String rawPass) {
+        passLength = rawPass.length();
+        String asterisks = "";
+        for (int i = 0; i < passLength; i++) {
+            asterisks += "*";
         }
-        
-    
-    public String hidePassword(String rawPass){
-            passLength = rawPass.length();
-            String asterisks = "";
-            for (int i = 0; i < passLength; i++) {
-                asterisks += "*";
-            }
-            System.out.println(password);
-            return asterisks;
-        }
-        public String savePassword(String rawPass){
-            if (rawPass.length() > passLength) {
-                for (int i = 0; i < rawPass.length(); i++) {
-                    if (rawPass.charAt(i) != '*') {
-                        password += rawPass.charAt(i);
-                    }
+        return asterisks;
+    }
+
+    public String savePassword(String rawPass) {
+        System.out.println(System.getProperty("user.name"));
+        if (rawPass.length() > passLength) {
+            for (int i = 0; i < rawPass.length(); i++) {
+                if (rawPass.charAt(i) != '*') {
+                    password += rawPass.charAt(i);
                 }
-            } else if (rawPass.length() < passLength) {
-                password = password.substring(0, rawPass.length());
             }
-            return password;
+        } else if (rawPass.length() < passLength) {
+            password = password.substring(0, rawPass.length());
         }
+        return password;
+    }
 }
+
+/* AES ENCRYPTION
     //    public String decrypt(byte[] encrypted, SecretKey secretKey){
 //        Cipher cipher;
 //        try {
@@ -229,6 +235,8 @@ public class Main {
 //        }
 //        return null;
 //    }
+ */
+ /* SHA HASH
 //        public byte[] hashPassword(String password, byte[] salt) {
 //        try {
 //            MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -241,4 +249,4 @@ public class Main {
 //        }
 //        return null;
 //    }
-
+ */
