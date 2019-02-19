@@ -1,12 +1,19 @@
-
 package View;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 public class Register extends javax.swing.JPanel {
 
     public Frame frame;
-    
+    String pass;
+    String pass2;
+
     public Register() {
         initComponents();
+        pass = "";
+        pass2 = "";
     }
 
     @SuppressWarnings("unchecked")
@@ -33,12 +40,18 @@ public class Register extends javax.swing.JPanel {
         password.setBackground(new java.awt.Color(240, 240, 240));
         password.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        password.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "PASSWORD", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        password.setToolTipText("Must be at least 8 characters with at least one number and one letter.");
+        password.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "PASSWORD", 2, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passwordKeyTyped(evt);
+            }
+        });
 
         username.setBackground(new java.awt.Color(240, 240, 240));
         username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        username.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "USERNAME", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        username.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "USERNAME", 2, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -48,7 +61,12 @@ public class Register extends javax.swing.JPanel {
         confpass.setBackground(new java.awt.Color(240, 240, 240));
         confpass.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         confpass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        confpass.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "CONFIRM PASSWORD", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        confpass.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "CONFIRM PASSWORD", 2, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        confpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                confpassKeyTyped(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -65,21 +83,21 @@ public class Register extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(200, Short.MAX_VALUE)
+                .addContainerGap(145, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(username)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
                     .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(confpass, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(200, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(120, 120, 120))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,15 +119,55 @@ public class Register extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        frame.registerAction(username.getText(), password.getText(), confpass.getText());
-        frame.loginNav();
+        if (password.getText().equals(confpass.getText())) {
+            if (pass.contains("null")) {
+                frame.registerAction(username.getText(), pass.substring(4) + password.getText().substring(password.getText().length() - 1), pass2.substring(4) + confpass.getText().substring(confpass.getText().length() - 1));
+            } else {
+                frame.registerAction(username.getText(), pass + password.getText().substring(password.getText().length() - 1), pass2 + confpass.getText().substring(confpass.getText().length() - 1));
+            }
+            System.out.println("password = " + pass.substring(4) + password.getText().substring(password.getText().length() - 1));
+            username.setText("");
+            password.setText("");
+            confpass.setText("");
+            frame.loginNav();
+        } else {
+            username.setText("");
+            password.setText("");
+            confpass.setText("");
+            JOptionPane.showMessageDialog(null, "Passwords Do Not Match!");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         frame.loginNav();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyTyped
+        // TODO add your handling code here:
+        password.addKeyListener(new KeyAdapter() {
 
+            @Override
+            public void keyTyped(KeyEvent arg0) {
+                pass = frame.main.savePassword(password.getText());
+                password.setText(frame.main.hidePassword(password.getText()));
+            }
+        });
+    }//GEN-LAST:event_passwordKeyTyped
+
+    private void confpassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confpassKeyTyped
+        // TODO add your handling code here:
+        confpass.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyTyped(KeyEvent arg0) {
+                pass2 = frame.main.savePassword(confpass.getText());
+                confpass.setText(frame.main.hidePassword(confpass.getText()));
+            }
+        });
+    }//GEN-LAST:event_confpassKeyTyped
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField confpass;
     private javax.swing.JButton jButton1;
