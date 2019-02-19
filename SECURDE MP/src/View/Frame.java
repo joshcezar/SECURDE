@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 public class Frame extends javax.swing.JFrame {
-
     public Frame() {
         initComponents();
     }
@@ -49,12 +48,7 @@ public class Frame extends javax.swing.JFrame {
         adminBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         adminBtn.setText("Admin Home");
         adminBtn.setFocusable(false);
-/*        adminBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminBtnActionPerformed(evt);
-            }
-        });
-*/
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SECURITY Svcs");
@@ -64,32 +58,17 @@ public class Frame extends javax.swing.JFrame {
         managerBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         managerBtn.setText("Manager Home");
         managerBtn.setFocusable(false);
-/*        managerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                managerBtnActionPerformed(evt);
-            }
-        });
-*/
+
         staffBtn.setBackground(new java.awt.Color(250, 250, 250));
         staffBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         staffBtn.setText("Staff Home");
         staffBtn.setFocusable(false);
-/*        staffBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffBtnActionPerformed(evt);
-            }
-        });
-*/
+
         clientBtn.setBackground(new java.awt.Color(250, 250, 250));
         clientBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         clientBtn.setText("Client Home");
         clientBtn.setFocusable(false);
-/*        clientBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clientBtnActionPerformed(evt);
-            }
-        });
-*/
+
         logoutBtn.setBackground(new java.awt.Color(250, 250, 250));
         logoutBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         logoutBtn.setText("LOGOUT");
@@ -97,6 +76,12 @@ public class Frame extends javax.swing.JFrame {
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutBtnActionPerformed(evt);
+                
+                //Enable All Buttons
+                adminBtn.setVisible(true);
+                managerBtn.setVisible(true);
+                staffBtn.setVisible(true);
+                clientBtn.setVisible(true);
             }
         });
 
@@ -263,19 +248,26 @@ public class Frame extends javax.swing.JFrame {
     }
 
     public void registerAction(String username, String password, String confpass) {
-        if (main.addUser(username, password)) {
-            frameView.show(Container, "homePnl");
-        } else {
-            JOptionPane.showMessageDialog(null, "username already taken");
-        }
+    	//Check if password and confpass is the same
+    	//if(main.validatePassword(password, confpass)) {
+    		if (main.addUser(username, password)) {
+                frameView.show(Container, "homePnl");
+                System.out.println("=====");
+                System.out.println("Added User:"+username);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Username Already Taken");
+            }
+    	//} else JOptionPane.showMessageDialog(null,"Password does not match!","Error",JOptionPane.ERROR_MESSAGE);
     }
 
     public void loginAction(String username, String password) {
         if (main.loginUser(username, password)) {
             frameView.show(Container, "homePnl");
-        }
-
-        JOptionPane.showMessageDialog(null, main.loginUser(username, password));
+        }else
+        //JOptionPane.showMessageDialog(null, main.loginUser(username, password));
+       JOptionPane.showMessageDialog(null,"Invalid Login Credentials!","Error",JOptionPane.ERROR_MESSAGE);
+        
     }
 
     public void checkRole(String username, String password) {

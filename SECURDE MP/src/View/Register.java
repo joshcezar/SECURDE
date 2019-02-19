@@ -27,6 +27,11 @@ public class Register extends javax.swing.JPanel {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+                
+                //Clear Fields
+                username.setText(null);
+                password.setText(null);
+                confpass.setText(null);
             }
         });
 
@@ -57,6 +62,11 @@ public class Register extends javax.swing.JPanel {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+                
+                //Clear Fields
+                username.setText(null);
+                password.setText(null);
+                confpass.setText(null);
             }
         });
 

@@ -68,7 +68,7 @@ public class Main {
         }
         return null;
     }
-    private static boolean validatePassword(String originalPassword, String storedPassword){ // check if equal password
+    public static boolean validatePassword(String originalPassword, String storedPassword){ // check if equal password
         try {
             String[] parts = storedPassword.split(":");
             int iterations = Integer.parseInt(parts[0]);
