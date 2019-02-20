@@ -200,8 +200,11 @@ public class Frame extends javax.swing.JFrame {
     public void registerAction(String username, String password, String confpass) {
         if (main.addUser(username, password)) {
             loginNav();
-            JOptionPane.showMessageDialog(null, "Succesfully Created User!");
-        } else {
+            JOptionPane.showMessageDialog(null, "Succesfully Created User!"); 
+        }else if(!(main.checkRequiredMinPassword(password))) {
+        	JOptionPane.showMessageDialog(null,"Password must be at least 8 characters with at least ONE special character, digit, uppercase, and lowercase.","Error",JOptionPane.ERROR_MESSAGE);      	
+        }
+        else {
             JOptionPane.showMessageDialog(null, "Invalid Inputs, Please try again!");
         }
     }

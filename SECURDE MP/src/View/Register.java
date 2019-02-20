@@ -42,7 +42,7 @@ public class Register extends javax.swing.JPanel {
         password.setBackground(new java.awt.Color(240, 240, 240));
         password.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        password.setToolTipText("Must be at least 8 characters with at least one number and one letter.");
+        password.setToolTipText("Must be at least 8 characters with at least ONE special character, digit, uppercase, and lowercase.");
         password.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "PASSWORD", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
         password.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -148,7 +148,7 @@ public class Register extends javax.swing.JPanel {
             username.setText("");
             password.setText("");
             confpass.setText("");
-            JOptionPane.showMessageDialog(null, "Passwords Do Not Match!");
+            JOptionPane.showMessageDialog(null,"Passwords do not match!","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

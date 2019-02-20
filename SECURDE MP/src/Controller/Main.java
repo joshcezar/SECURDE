@@ -128,7 +128,7 @@ public class Main {
         return bytes;
     }
 
-    private boolean checkRequiredMinPassword(String password) { // salcy
+/*    private boolean checkRequiredMinPassword(String password) { // salcy
 
         boolean hasLetter = false;
         boolean hasDigit = false;
@@ -153,61 +153,44 @@ public class Main {
         } else {
             return false;
         }
+        
+    }*/
+    
+ public boolean checkRequiredMinPassword(String password) {
+
+	String specialChars = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
+	 
+    boolean hasUpperCase = false;
+    boolean hasLowerCase = false;
+    boolean hasSpecialChar = false;
+    boolean hasDigit = false;
+
+    if (password.length() >= 8) {
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (Character.isUpperCase(c)) {
+                hasUpperCase = true;
+            }else if(Character.isLowerCase(c)) {
+            	hasLowerCase=true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            }else if(specialChars.contains(String.valueOf(c))) {
+            	hasSpecialChar = true;
+            }
+            if (hasUpperCase && hasLowerCase && hasSpecialChar && hasDigit) {
+                break;
+            }
+        }
+        if (hasUpperCase && hasLowerCase && hasSpecialChar && hasDigit) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
     }
     
-//    private boolean checkRequiredMinPassword(String password) { //Check checkRegisterPassword() in Register class
-//
-////        boolean hasLetter = false;
-////        boolean hasDigit = false;
-//    	String specialChars = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
-//        char currentCharacter;
-//        boolean numberPresent = false;
-//        boolean upperCasePresent = false;
-//        boolean lowerCasePresent = false;
-//        boolean specialCharacterPresent = false;
-//        if (password.length() >= 8) {
-//            for (int i = 0; i < password.length(); i++) {
-////                char c = password.charAt(i);
-////                if (Character.isLetter(c)) {
-////                    hasLetter = true;
-////                } else if (Character.isDigit(c)) {
-////                    hasDigit = true;
-////                }
-////                if (hasLetter && hasDigit) {
-////                    break;
-////                }
-////            }
-////            if (hasLetter && hasDigit) {
-////                return true;
-////            } else {
-////                return false;
-////            }
-////        } else {
-////            return false;
-////        }
-//        	currentCharacter = password.charAt(i);
-//            if (Character.isDigit(currentCharacter)) {
-//                numberPresent = true;
-//            }else if (Character.isUpperCase(currentCharacter)) {
-//                upperCasePresent = true;
-//            }else if (Character.isLowerCase(currentCharacter)) {
-//                lowerCasePresent = true;
-//            }else if (specialChars.contains(String.valueOf(currentCharacter))) {
-//                specialCharacterPresent = true;
-//            }
-//            if(numberPresent && upperCasePresent && lowerCasePresent && specialCharacterPresent) {
-//            	break;
-//            }
-//            
-//            if(numberPresent && upperCasePresent && lowerCasePresent && specialCharacterPresent) {
-//            	return true;
-//            }else {
-//                return false;
-//            }
-//        }
-//      }
-//          return false;
-//    }
+ }
 
     public boolean addUser(String username, String password) {
         ArrayList<User> users = sqlite.getUsers();
