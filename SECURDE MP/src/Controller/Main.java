@@ -155,7 +155,7 @@ public class Main {
         }
     }
     
-//    public boolean checkRequiredMinPassword(String password) { //Check checkRegisterPassword() in Register class
+//    private boolean checkRequiredMinPassword(String password) { //Check checkRegisterPassword() in Register class
 //
 ////        boolean hasLetter = false;
 ////        boolean hasDigit = false;

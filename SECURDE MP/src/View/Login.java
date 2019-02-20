@@ -12,6 +12,7 @@ public class Login extends javax.swing.JPanel {
     public Login() {
         initComponents();
         password = "";
+        jTextField2.setTransferHandler(null);
     }
 
     @SuppressWarnings("unchecked")

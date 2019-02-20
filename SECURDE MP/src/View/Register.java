@@ -14,6 +14,8 @@ public class Register extends javax.swing.JPanel {
         initComponents();
         pass = "";
         pass2 = "";
+        password.setTransferHandler(null);
+        confpass.setTransferHandler(null);
     }
 
     @SuppressWarnings("unchecked")
