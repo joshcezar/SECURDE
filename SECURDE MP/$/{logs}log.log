@@ -1,0 +1,5 @@
+Debug Message Logged !!!
+Info Message Logged !!!
+Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at Controller.Main.main(Main.java:37)

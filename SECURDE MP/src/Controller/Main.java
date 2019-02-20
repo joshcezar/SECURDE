@@ -2,23 +2,40 @@ package Controller;
 
 import Model.User;
 import View.Frame;
+import java.io.File;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Random;
+import org.apache.log4j.Logger;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.xml.bind.DatatypeConverter;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.PropertyConfigurator;
 
 public class Main {
 
-    public SQLite sqlite;
+    private static final Logger LOGGER = LogManager.getLogger(Main.class.getName());
+
+    private SQLite sqlite;
     public int logInAttempts = 0;
     private int passLength = 0;
     private User LoggedInUsername;
     private String password; //text that was saved
+    private static InetAddress ipAddress;
 
     public static void main(String[] args) {
         Main m = new Main();
         m.init();
+        try {
+            String log4jConfigFile = System.getProperty("user.dir")
+                    + File.separator + "log4j.properties";
+            PropertyConfigurator.configure(log4jConfigFile);
+            ipAddress = InetAddress.getLocalHost();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void init() {
@@ -40,7 +57,7 @@ public class Main {
         sqlite.addUser("staff", hashPassword("qwerty1234"), 3);
         sqlite.addUser("client1", hashPassword("qwerty1234"), 2);
         sqlite.addUser("client2", hashPassword("qwerty1234"), 2);
-        sqlite.addUser("disabled", hashPassword("qwerty1234"),1);
+        sqlite.addUser("disabled", hashPassword("qwerty1234"), 1);
         // Get users
         ArrayList<User> users = sqlite.getUsers();
         for (int nCtr = 0; nCtr < users.size(); nCtr++) {
@@ -53,8 +70,7 @@ public class Main {
         // Initialize User Interface
         Frame frame = new Frame();
         frame.init(this);
-        
-        
+
     }
 
     private byte[] generateSalt() { // generates random salt
@@ -112,7 +128,7 @@ public class Main {
         return bytes;
     }
 
-    private boolean checkRequiredMinPassword(String password) {
+    private boolean checkRequiredMinPassword(String password) { // salcy
 
         boolean hasLetter = false;
         boolean hasDigit = false;
@@ -138,6 +154,60 @@ public class Main {
             return false;
         }
     }
+    
+//    public boolean checkRequiredMinPassword(String password) { //Check checkRegisterPassword() in Register class
+//
+////        boolean hasLetter = false;
+////        boolean hasDigit = false;
+//    	String specialChars = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
+//        char currentCharacter;
+//        boolean numberPresent = false;
+//        boolean upperCasePresent = false;
+//        boolean lowerCasePresent = false;
+//        boolean specialCharacterPresent = false;
+//        if (password.length() >= 8) {
+//            for (int i = 0; i < password.length(); i++) {
+////                char c = password.charAt(i);
+////                if (Character.isLetter(c)) {
+////                    hasLetter = true;
+////                } else if (Character.isDigit(c)) {
+////                    hasDigit = true;
+////                }
+////                if (hasLetter && hasDigit) {
+////                    break;
+////                }
+////            }
+////            if (hasLetter && hasDigit) {
+////                return true;
+////            } else {
+////                return false;
+////            }
+////        } else {
+////            return false;
+////        }
+//        	currentCharacter = password.charAt(i);
+//            if (Character.isDigit(currentCharacter)) {
+//                numberPresent = true;
+//            }else if (Character.isUpperCase(currentCharacter)) {
+//                upperCasePresent = true;
+//            }else if (Character.isLowerCase(currentCharacter)) {
+//                lowerCasePresent = true;
+//            }else if (specialChars.contains(String.valueOf(currentCharacter))) {
+//                specialCharacterPresent = true;
+//            }
+//            if(numberPresent && upperCasePresent && lowerCasePresent && specialCharacterPresent) {
+//            	break;
+//            }
+//            
+//            if(numberPresent && upperCasePresent && lowerCasePresent && specialCharacterPresent) {
+//            	return true;
+//            }else {
+//                return false;
+//            }
+//        }
+//      }
+//          return false;
+//    }
 
     public boolean addUser(String username, String password) {
         ArrayList<User> users = sqlite.getUsers();
@@ -150,6 +220,8 @@ public class Main {
                 return false;
             }
         } else {
+            LOGGER.info("Error in registering, current user is : " + System.getProperty("user.name") + "|" + " IP ADDRESS IS: " + ipAddress);
+
             return false;
         }
     }
@@ -164,10 +236,12 @@ public class Main {
                 }
             }
         }
+        LOGGER.info("Error in loggin in, current user is : " + System.getProperty("user.name") + "|" + " IP ADDRESS IS: " + ipAddress);
+
         return false;
     }
 
-    private void saveLoggedInUser(int id, String username, String password, int role) {
+    public void saveLoggedInUser(int id, String username, String password, int role) {
         User user = new User(id, username, password, role);
         this.LoggedInUsername = user;
     }

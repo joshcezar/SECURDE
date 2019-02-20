@@ -105,14 +105,17 @@ public class Login extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (password.contains("null")) {
             frame.loginAction(jTextField1.getText(), password.substring(4) + jTextField2.getText().substring(jTextField2.getText().length() - 1));
-        } else {
+        } else if (jTextField2.getText().length() > 0) {
             frame.loginAction(jTextField1.getText(), password + jTextField2.getText().substring(jTextField2.getText().length() - 1));
+        } else if (jTextField2.getText().length() <= 0){
+            frame.loginAction(jTextField1.getText(), password + jTextField2.getText());
+
         }
+
         if (frame.main.logInAttempts == 3) {
             jButton2.setEnabled(false);
             JOptionPane.showMessageDialog(null, "You have exceeded the maximum log in attempts!");
         }
-        System.out.println("password = " + password.substring(4) + jTextField2.getText().substring(jTextField2.getText().length() - 1));
         jTextField1.setText("");
         jTextField2.setText("");
 
