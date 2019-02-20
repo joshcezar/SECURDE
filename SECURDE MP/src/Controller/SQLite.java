@@ -12,7 +12,7 @@ public class SQLite {
 
     String driverURL = "jdbc:sqlite:" + "database.db";
 
-    public void createNewDatabase() {
+    void createNewDatabase() {
         try (Connection conn = DriverManager.getConnection(driverURL)) {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
@@ -22,7 +22,7 @@ public class SQLite {
         }
     }
 
-    public void createUserTable() {
+    void createUserTable() {
         String sql = "CREATE TABLE IF NOT EXISTS users (\n"
                 + " id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " username TEXT NOT NULL,\n"
@@ -38,7 +38,7 @@ public class SQLite {
         }
     }
 
-    public void dropUserTable() {
+    void dropUserTable() {
         String sql = "DROP TABLE users;";
 
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -49,7 +49,7 @@ public class SQLite {
         }
     }
 
-    public ArrayList<User> getUsers() {
+    ArrayList<User> getUsers() {
         String sql = "SELECT id, username, password, role FROM users";
         ArrayList<User> users = new ArrayList<User>();
 
@@ -69,7 +69,7 @@ public class SQLite {
         return users;
     }
 
-    public void addUser(String username, String password) {
+    void addUser(String username, String password) {
         String sql = "INSERT INTO users(username,password) VALUES('" + username + "','" + password + "')";
 
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -86,7 +86,7 @@ public class SQLite {
         }
     }
 
-    public void addUser(String username, String password, int role) {
+    void addUser(String username, String password, int role) {
         String sql = "INSERT INTO users(username,password,role) VALUES('" + username + "','" + password + "','" + role + "')";
 
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -97,7 +97,7 @@ public class SQLite {
         }
     }
 
-    public void removeUser(String username) {
+    void removeUser(String username) {
         String sql = "DELETE FROM users WHERE username='" + username + "');";
 
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -107,23 +107,23 @@ public class SQLite {
         } catch (Exception ex) {
         }
     }
-        public boolean checkExistingUsers(String username) {
-        String sql = "SELECT username FROM users";
-        ArrayList<User> users = new ArrayList<User>();
+    boolean checkExistingUsers(String username) {
+    String sql = "SELECT username FROM users";
+    ArrayList<User> users = new ArrayList<User>();
 
-        try (Connection conn = DriverManager.getConnection(driverURL);
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
+    try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
 
-            while (rs.next()) {
-                if(username.equals(rs.getString("username"))){
-                    return false;
-                }
+        while (rs.next()) {
+            if(username.equals(rs.getString("username"))){
+                return false;
             }
-            return true;
-        } catch (Exception ex) {
         }
         return true;
+    } catch (Exception ex) {
+    }
+    return true;
     }
 
 //    public String searchUser(String username, String password) {

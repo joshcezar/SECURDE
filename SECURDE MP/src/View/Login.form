@@ -106,6 +106,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jTextField2MouseDragged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>

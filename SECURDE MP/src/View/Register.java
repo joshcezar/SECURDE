@@ -41,7 +41,12 @@ public class Register extends javax.swing.JPanel {
         password.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         password.setToolTipText("Must be at least 8 characters with at least one number and one letter.");
-        password.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "PASSWORD", 2, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        password.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "PASSWORD", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        password.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                passwordMouseDragged(evt);
+            }
+        });
         password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 passwordKeyTyped(evt);
@@ -51,7 +56,7 @@ public class Register extends javax.swing.JPanel {
         username.setBackground(new java.awt.Color(240, 240, 240));
         username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        username.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "USERNAME", 2, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        username.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "USERNAME", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -61,7 +66,12 @@ public class Register extends javax.swing.JPanel {
         confpass.setBackground(new java.awt.Color(240, 240, 240));
         confpass.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         confpass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        confpass.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "CONFIRM PASSWORD", 2, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        confpass.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "CONFIRM PASSWORD", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        confpass.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                confpassMouseDragged(evt);
+            }
+        });
         confpass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 confpassKeyTyped(evt);
@@ -90,14 +100,14 @@ public class Register extends javax.swing.JPanel {
                     .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(confpass, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(120, 120, 120))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton2)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,6 +150,9 @@ public class Register extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         frame.loginNav();
+        username.setText("");
+        password.setText("");
+        confpass.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyTyped
@@ -165,6 +178,20 @@ public class Register extends javax.swing.JPanel {
             }
         });
     }//GEN-LAST:event_confpassKeyTyped
+
+    private void confpassMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confpassMouseDragged
+        // TODO add your handling code here:
+        username.setText("");
+        password.setText("");
+        confpass.setText("");
+    }//GEN-LAST:event_confpassMouseDragged
+
+    private void passwordMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordMouseDragged
+        // TODO add your handling code here:
+        username.setText("");
+        password.setText("");
+        confpass.setText("");
+    }//GEN-LAST:event_passwordMouseDragged
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }

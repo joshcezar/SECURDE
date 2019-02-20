@@ -98,6 +98,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="passwordMouseDragged"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwordKeyTyped"/>
       </Events>
     </Component>
@@ -153,6 +154,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="confpassMouseDragged"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="confpassKeyTyped"/>
       </Events>
     </Component>

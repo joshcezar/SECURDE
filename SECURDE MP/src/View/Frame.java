@@ -161,7 +161,6 @@ public class Frame extends javax.swing.JFrame {
     private ClientHome clientHomePnl = new ClientHome();
     private CardLayout contentView = new CardLayout();
     private CardLayout frameView = new CardLayout();
-    private int role;
 
     public void init(Main controller) {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

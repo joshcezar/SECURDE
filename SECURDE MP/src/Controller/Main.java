@@ -57,14 +57,14 @@ public class Main {
         
     }
 
-    public byte[] generateSalt() { // generates random salt
+    private byte[] generateSalt() { // generates random salt
         Random random = new Random();
         byte bytes[] = new byte[20];
         random.nextBytes(bytes);
         return bytes;
     }
 
-    public String hashPassword(String password) {
+    private String hashPassword(String password) {
         try {
             int iterations = 1; // random number of iterations to perform
             char[] chars = password.toCharArray();
@@ -112,7 +112,7 @@ public class Main {
         return bytes;
     }
 
-    public boolean checkRequiredMinPassword(String password) {
+    private boolean checkRequiredMinPassword(String password) {
 
         boolean hasLetter = false;
         boolean hasDigit = false;
@@ -167,7 +167,7 @@ public class Main {
         return false;
     }
 
-    public void saveLoggedInUser(int id, String username, String password, int role) {
+    private void saveLoggedInUser(int id, String username, String password, int role) {
         User user = new User(id, username, password, role);
         this.LoggedInUsername = user;
     }
