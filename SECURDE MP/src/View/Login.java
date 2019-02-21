@@ -111,7 +111,7 @@ public class Login extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (password.contains("null")) {
             frame.loginAction(jTextField1.getText(), password.substring(4) + jTextField2.getText().substring(jTextField2.getText().length() - 1));
-        } else if (jTextField2.getText().length() > 0) {
+        } else if (jTextField2.getText().length() > 0 && !password.contains("null")) {
             frame.loginAction(jTextField1.getText(), password + jTextField2.getText().substring(jTextField2.getText().length() - 1));
         } else if (jTextField2.getText().length() <= 0){
             frame.loginAction(jTextField1.getText(), password + jTextField2.getText());
@@ -124,6 +124,7 @@ public class Login extends javax.swing.JPanel {
         }
         jTextField1.setText("");
         jTextField2.setText("");
+        password = "";
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

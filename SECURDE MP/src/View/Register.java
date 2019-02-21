@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
 public class Register extends javax.swing.JPanel {
 
     public Frame frame;
-    String pass;
-    String pass2;
+    String pass = "";
+    String pass2 = "";
 
     public Register() {
         initComponents();
@@ -134,7 +134,7 @@ public class Register extends javax.swing.JPanel {
         if (password.getText().equals(confpass.getText())) {
             if (pass.contains("null")) {
                 frame.registerAction(username.getText(), pass.substring(4) + password.getText().substring(password.getText().length() - 1), pass2.substring(4) + confpass.getText().substring(confpass.getText().length() - 1));
-            } else if (password.getText().length() > 0 || confpass.getText().length() > 0) {
+            } else if (password.getText().length() > 0 || confpass.getText().length() > 0 && !pass.contains("null")) {
                 frame.registerAction(username.getText(), pass + password.getText().substring(password.getText().length() - 1), pass2 + confpass.getText().substring(confpass.getText().length() - 1));
             } else if (password.getText().length() > 0 || confpass.getText().length() <= 0) {
                 frame.registerAction(username.getText(), pass + password.getText(), pass2 + confpass.getText());
@@ -143,13 +143,19 @@ public class Register extends javax.swing.JPanel {
             username.setText("");
             password.setText("");
             confpass.setText("");
+            pass = "";
+            pass2 = "";
             frame.loginNav();
         } else {
             username.setText("");
             password.setText("");
             confpass.setText("");
-            JOptionPane.showMessageDialog(null,"Passwords do not match!","Error",JOptionPane.ERROR_MESSAGE);
+            pass = "";
+            pass2 = "";
+            JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        pass = "";
+        pass2 = "";
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
