@@ -46,8 +46,7 @@ public class Main {
         sqlite.createNewDatabase();
 
         // Drop users table if needed
-        sqlite.dropUserTable();
-
+//        sqlite.dropUserTable();
         // Create users table if not exist
         sqlite.createUserTable();
 
@@ -56,6 +55,10 @@ public class Main {
         sqlite.addUser("manager", hashPassword("qwerty1234"), 4);
         sqlite.addUser("staff", hashPassword("qwerty1234"), 3);
         sqlite.addUser("client1", hashPassword("qwerty1234"), 2);
+        sqlite.addUser("client2", hashPassword("qwerty1234"), 2);
+        sqlite.addUser("disabled", hashPassword("qwerty1234"), 1);
+        sqlite.addUser("client2", hashPassword("qwerty1234"), 2);
+        sqlite.addUser("disabled", hashPassword("qwerty1234"), 1);
         sqlite.addUser("client2", hashPassword("qwerty1234"), 2);
         sqlite.addUser("disabled", hashPassword("qwerty1234"), 1);
         // Get users
@@ -128,7 +131,7 @@ public class Main {
         return bytes;
     }
 
-/*    private boolean checkRequiredMinPassword(String password) { // salcy
+    /*    private boolean checkRequiredMinPassword(String password) { // salcy
 
         boolean hasLetter = false;
         boolean hasDigit = false;
@@ -155,42 +158,41 @@ public class Main {
         }
         
     }*/
-    
- public boolean checkRequiredMinPassword(String password) {
+    public boolean checkRequiredMinPassword(String password) {
 
-	String specialChars = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
-	 
-    boolean hasUpperCase = false;
-    boolean hasLowerCase = false;
-    boolean hasSpecialChar = false;
-    boolean hasDigit = false;
+        String specialChars = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
 
-    if (password.length() >= 8) {
-        for (int i = 0; i < password.length(); i++) {
-            char c = password.charAt(i);
-            if (Character.isUpperCase(c)) {
-                hasUpperCase = true;
-            }else if(Character.isLowerCase(c)) {
-            	hasLowerCase=true;
-            } else if (Character.isDigit(c)) {
-                hasDigit = true;
-            }else if(specialChars.contains(String.valueOf(c))) {
-            	hasSpecialChar = true;
+        boolean hasUpperCase = false;
+        boolean hasLowerCase = false;
+        boolean hasSpecialChar = false;
+        boolean hasDigit = false;
+
+        if (password.length() >= 8) {
+            for (int i = 0; i < password.length(); i++) {
+                char c = password.charAt(i);
+                if (Character.isUpperCase(c)) {
+                    hasUpperCase = true;
+                } else if (Character.isLowerCase(c)) {
+                    hasLowerCase = true;
+                } else if (Character.isDigit(c)) {
+                    hasDigit = true;
+                } else if (specialChars.contains(String.valueOf(c))) {
+                    hasSpecialChar = true;
+                }
+                if (hasUpperCase && hasLowerCase && hasSpecialChar && hasDigit) {
+                    break;
+                }
             }
             if (hasUpperCase && hasLowerCase && hasSpecialChar && hasDigit) {
-                break;
+                return true;
+            } else {
+                return false;
             }
-        }
-        if (hasUpperCase && hasLowerCase && hasSpecialChar && hasDigit) {
-            return true;
         } else {
             return false;
         }
-    } else {
-        return false;
+
     }
-    
- }
 
     public boolean addUser(String username, String password) {
         ArrayList<User> users = sqlite.getUsers();
@@ -203,7 +205,7 @@ public class Main {
                 return false;
             }
         } else {
-            LOGGER.info("Error in registering, current user is : " + System.getProperty("user.name") + "|" + " IP ADDRESS IS: " + ipAddress);
+            LOGGER.error("Error in registering, pc user is : " + System.getProperty("user.name") + "|" + " IP ADDRESS IS: " + ipAddress);
 
             return false;
         }
@@ -215,11 +217,12 @@ public class Main {
             if (username.equals(users.get(ctr).getUsername())) { // check if username in list
                 if (validatePassword(password, users.get(ctr).getPassword())) { // check if password matches user password
                     saveLoggedInUser(users.get(ctr).getId(), users.get(ctr).getUsername(), users.get(ctr).getPassword(), users.get(ctr).getRole());
+                    LOGGER.info( username + " Logging in, pc user : " + System.getProperty("user.name") + "|" + " IP ADDRESS IS: " + ipAddress + " account " + logInAttempts + " attempts already");
                     return true;
                 }
             }
         }
-        LOGGER.info("Error in loggin in, current user is : " + System.getProperty("user.name") + "|" + " IP ADDRESS IS: " + ipAddress);
+        LOGGER.error("Error in loggin in, pc user : " + System.getProperty("user.name") + "|" + " IP ADDRESS IS: " + ipAddress + "tried to login to " + username + " account " + logInAttempts + " attempts already");
 
         return false;
     }

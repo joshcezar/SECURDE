@@ -1,51 +1,15 @@
-2019-02-20 11:48:35 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:51:30 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:51:32 INFO  Error in loggin in, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:52:14 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:52:26 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:52:29 INFO  Error in loggin in, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:52:30 INFO  Error in loggin in, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:52:30 INFO  Error in loggin in, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:55:20 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:55:24 INFO  Error in adding users, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:55:25 INFO  Error in adding users, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:56:12 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 11:56:15 INFO  Error in registering, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:00:11 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:00:14 INFO  Error in loggin in, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:00:58 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:01:17 INFO  Error in registering, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:01:43 INFO  Error in registering, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:02:10 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:04:00 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:04:13 INFO  Error in registering, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:04:34 INFO  Error in registering, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:04:56 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:05:19 INFO  Error in registering, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:05:37 INFO  Error in loggin in, current user is : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 12:08:13 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
-2019-02-20 13:09:58 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:10:10 INFO  Error in loggin in, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:18:01 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:18:48 INFO  Error in loggin in, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:18:59 INFO  Error in loggin in, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:26:26 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:26:56 INFO  Error in registering, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:27:22 INFO  Error in registering, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:28:24 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:28:31 INFO  Error in loggin in, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:28:40 INFO  Error in loggin in, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:29:16 INFO  Error in registering, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:30:03 INFO  Error in loggin in, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:30:09 INFO  Error in loggin in, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:30:54 INFO  Error in loggin in, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:36:19 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:36:47 INFO  Error in registering, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:40:51 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:41:15 INFO  Error in registering, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:42:18 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:44:41 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:46:31 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:46:36 INFO  Error in loggin in, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:47:05 INFO  Error in registering, current user is : mgabriel| IP ADDRESS IS: PHMADINTERN03/10.88.36.89
-2019-02-20 13:47:15 INFO  dropping table current user is : mgabriel IP ADDRESS IS: PHMADINTERN03/10.88.36.89
+2019-02-21 10:58:20 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
+2019-02-21 10:58:38 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
+2019-02-21 10:58:48 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
+2019-02-21 10:59:21 INFO  dropping table current user is : User IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112
+2019-02-21 11:02:10 INFO  Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to  account
+2019-02-21 11:02:13 INFO  Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to asd account
+2019-02-21 11:05:23 INFO  client2Logging in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112 account0 attempts already
+2019-02-21 11:06:51 ERROR Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to asd account 0 attempts already
+2019-02-21 11:06:55 ERROR Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to asd account 1 attempts already
+2019-02-21 11:06:57 ERROR Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to asd account 2 attempts already
+2019-02-21 11:07:34 ERROR Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to  account 0 attempts already
+2019-02-21 11:07:35 ERROR Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to  account 1 attempts already
+2019-02-21 11:07:36 ERROR Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to  account 2 attempts already
+2019-02-21 11:07:42 ERROR Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to asd account 0 attempts already
+2019-02-21 11:08:15 ERROR Error in loggin in, pc user : User| IP ADDRESS IS: DESKTOP-5KT953O/10.20.38.112tried to login to asd account 0 attempts already

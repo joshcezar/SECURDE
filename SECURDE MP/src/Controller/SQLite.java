@@ -94,6 +94,7 @@ public class SQLite {
         String log4jConfigFile = System.getProperty("user.dir")
                 + File.separator + "log4j.properties";
         PropertyConfigurator.configure(log4jConfigFile);
+        if(checkExistingUsers(username) == true){
         try (Connection conn = DriverManager.getConnection(driverURL);
                 Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
@@ -107,13 +108,17 @@ public class SQLite {
             LOGGER.info("Error in adding users, current user is : " + System.getProperty("user.name") + "|" + " IP ADDRESS IS: " + ipAddress);
 
         }
+        }else {
+            System.out.println("User already exists");
+        }
     }
 
     void addUser(String username, String password, int role) {
-        String sql = "INSERT INTO users(username,password,role) VALUES('" + username + "','" + password + "','" + role + "')";
+        String sql = "INSERT INTO users(username,password,role) VALUES('" + username + "','" + password + "','" + role + "') ";
         String log4jConfigFile = System.getProperty("user.dir")
                 + File.separator + "log4j.properties";
         PropertyConfigurator.configure(log4jConfigFile);
+        if(checkExistingUsers(username) == true){
         try (Connection conn = DriverManager.getConnection(driverURL);
                 Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
@@ -121,6 +126,9 @@ public class SQLite {
         } catch (Exception ex) {
             LOGGER.info("Error in registering, current user is : " + System.getProperty("user.name") + "|" + " IP ADDRESS IS: " + ipAddress);
 
+        }
+        }else {
+            System.out.println("User already exists");
         }
     }
 
