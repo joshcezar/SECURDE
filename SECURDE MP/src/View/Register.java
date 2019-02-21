@@ -132,26 +132,24 @@ public class Register extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (password.getText().equals(confpass.getText())) {
-            if (pass.contains("null")) {
+            if (pass.contains("null") && !pass2.contains("null")) {
                 frame.registerAction(username.getText(), pass.substring(4) + password.getText().substring(password.getText().length() - 1), pass2.substring(4) + confpass.getText().substring(confpass.getText().length() - 1));
+            } else if (pass2.contains("null") && !pass.contains("null")) {
+                frame.registerAction(username.getText(), pass + password.getText().substring(password.getText().length() - 1), pass2.substring(4) + confpass.getText().substring(confpass.getText().length() - 1));
             } else if (password.getText().length() > 0 || confpass.getText().length() > 0 && !pass.contains("null")) {
                 frame.registerAction(username.getText(), pass + password.getText().substring(password.getText().length() - 1), pass2 + confpass.getText().substring(confpass.getText().length() - 1));
-            } else if (password.getText().length() > 0 || confpass.getText().length() <= 0) {
+            } else if (password.getText().length() <= 0 || confpass.getText().length() <= 0) {
                 frame.registerAction(username.getText(), pass + password.getText(), pass2 + confpass.getText());
 
             }
             username.setText("");
             password.setText("");
             confpass.setText("");
-            pass = "";
-            pass2 = "";
             frame.loginNav();
         } else {
             username.setText("");
             password.setText("");
             confpass.setText("");
-            pass = "";
-            pass2 = "";
             JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         pass = "";
